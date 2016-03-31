@@ -1,0 +1,19 @@
+var html_res ='';
+<% if @error %>
+     html_res ='<tr class="danger">'+
+        '<td><strong><%=@lexem%></strong></td>'+
+         '<td colspan="2"><%=@error%></td>'+
+         '</tr>';
+<%else %>
+    html_res='<tr>'+
+        "<td rowspan='<%=@result.size%>'>"+
+        "<strong><%= @lexem %></strong>"+
+        "</td>";
+    <% @result.each do |x| %>
+        html_res=html_res+'<%= escape_javascript (render x) %>';
+        html_res= html_res+'</tr>';
+        html_res= html_res+"<%= escape_javascript((x==@result.last)? '' : '<tr>') %>";
+    <% end %>
+<% end %>
+$('.morph_info tr:first').after(html_res);
+$('.lexem_form form input[type=submit]').removeProp('disabled');
