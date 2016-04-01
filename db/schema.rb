@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318170705) do
+ActiveRecord::Schema.define(version: 20160331202730) do
 
   create_table "form", force: :cascade do |t|
     t.integer "rule"
     t.string  "suffix"
     t.string  "tag"
   end
+
+  add_index "form", ["suffix"], name: "index_form_on_suffix"
 
   create_table "norm", force: :cascade do |t|
     t.integer "rule"
@@ -29,5 +31,7 @@ ActiveRecord::Schema.define(version: 20160318170705) do
     t.integer "rule"
     t.string  "prefix"
   end
+
+  add_index "stem", ["prefix"], name: "index_stem_on_prefix"
 
 end
