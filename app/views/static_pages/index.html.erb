@@ -1,6 +1,6 @@
 <% provide(:title,'ПЛП ЛР Морфологический Анализатор') %>
 <div class='row well'>
-    <div class="col-md-offset-3 col-md-8 lexem_form">
+    <div class="col-md-offset-3 col-md-8 inline-form lexem_form">
         <%= form_tag lexem_analyze_path, class:"form-inline", remote:true do %>
             <div class="form-group">
                 <label for:'lexem'>Введите лексему:</label>
@@ -10,7 +10,28 @@
         <% end %>
     </div>
     <div class="col-md-12 result">
-    <table class="table table-striped table-condensed table-bordered table-hover morph_info">
+    <table class="table table-striped table-condensed table-bordered table-hover morph_lexem_info">
+    <tr>
+      <th> Лексема </th>
+      <th> Морфологическая информация </th>
+      <th> Базовая форма (лемма) </th>
+    </tr>
+    </table>
+    </div>
+</div>
+
+<div class='row well'>
+    <div class="col-md-offset-3 col-md-8 inline-form sentence_form">
+        <%= form_tag sentence_lexem_analyze_path, class:"form-inline", remote:true do %>
+            <div class="form-group">
+                <label for:'lexem'>Введите предложение:</label>
+                <%= text_area_tag :sentence, nil,rows: 5, cols: 50,  placeholder: 'Безмятежные дни осеннего Петербурга.', class: 'form-control'%>
+            </div>
+            <%= submit_tag 'Отправить', class: 'btn btn-default submit-btn' %>
+        <% end %>
+    </div>
+    <div class="col-md-12 result">
+    <table class="table table-striped table-condensed table-bordered table-hover morph_sentence_info">
     <tr>
       <th> Лексема </th>
       <th> Морфологическая информация </th>

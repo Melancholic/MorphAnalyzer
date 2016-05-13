@@ -15,5 +15,5 @@ var html_res ='';
         html_res= html_res+"<%= escape_javascript((x==@result.last)? '' : '<tr>') %>";
     <% end %>
 <% end %>
-$('.morph_info tr:first').after(html_res);
+$('.morph_lexem_info tr:first').after(html_res);
 $('.lexem_form form input[type=submit]').removeProp('disabled');
