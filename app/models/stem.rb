@@ -1,15 +1,10 @@
 class Stem < AbstractModel
-    self.table_name = 'stem';
-    @lexem= nil;
 
-    def self.morph_info(lexem)
-        res=Stem.joins("JOIN form ON stem.rule  = form.rule").where('prefix||suffix = ?', lexem).select('*');
-    end
-    def self.morph_info_humanize(lexem)
-        Stem.joins("JOIN form ON stem.rule  = form.rule").where('prefix||suffix = ?', lexem).select('*').map{|x| x.tags_humanize}
-    end
+    @lexem= nil;
+    has_many :forms, :foreign_key => :rule, :primary_key => :rule
+    has_one :norm, :foreign_key => :rule, :primary_key => :rule
 
     def lemma
-        self.prefix+Norm.find_by(rule:  self.rule).suffix
+        self.prefix + self.norm.suffix
     end
 end

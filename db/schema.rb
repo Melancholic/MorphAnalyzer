@@ -11,27 +11,52 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331202730) do
+ActiveRecord::Schema.define(version: 20160522101506) do
 
-  create_table "form", force: :cascade do |t|
+  create_table "forms", force: :cascade do |t|
     t.integer "rule"
     t.string  "suffix"
     t.string  "tag"
   end
 
-  add_index "form", ["suffix"], name: "index_form_on_suffix"
+  add_index "forms", ["suffix"], name: "index_forms_on_suffix"
 
-  create_table "norm", force: :cascade do |t|
+  create_table "forms_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "form_id"
+  end
+
+  add_index "forms_tags", ["form_id"], name: "index_forms_tags_on_form_id"
+  add_index "forms_tags", ["tag_id"], name: "index_forms_tags_on_tag_id"
+
+  create_table "norms", force: :cascade do |t|
     t.integer "rule"
     t.string  "suffix"
     t.string  "tag"
   end
 
-  create_table "stem", force: :cascade do |t|
+  create_table "norms_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "norm_id"
+  end
+
+  add_index "norms_tags", ["norm_id"], name: "index_norms_tags_on_norm_id"
+  add_index "norms_tags", ["tag_id"], name: "index_norms_tags_on_tag_id"
+
+  create_table "stems", force: :cascade do |t|
     t.integer "rule"
     t.string  "prefix"
   end
 
-  add_index "stem", ["prefix"], name: "index_stem_on_prefix"
+  add_index "stems", ["prefix"], name: "index_stems_on_prefix"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.string   "code",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "tags", ["name", "code"], name: "index_tags_on_name_and_code", unique: true
 
 end

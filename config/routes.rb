@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   post 'lexem_analyze' => 'static_pages#lexem_analyze' 
   post 'sentence_lexem_analyze' => 'static_pages#sentence_lexem_analyze' 
+  post 'find_references' => 'static_pages#find_references' 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

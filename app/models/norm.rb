@@ -1,3 +1,3 @@
 class Norm < AbstractModel
-    self.table_name = 'norm'
+    has_and_belongs_to_many :tags
 end
